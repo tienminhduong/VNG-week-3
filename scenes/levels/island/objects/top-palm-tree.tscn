@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwgiawnxls7h3"]
+
+[ext_resource type="Texture2D" uid="uid://getm5kr68qwe" path="res://assets/island/front_palm_trees/front_palm_tree_top_01.png" id="1_pb4sj"]
+[ext_resource type="Texture2D" uid="uid://07ilhsckqwm6" path="res://assets/island/front_palm_trees/front_palm_tree_top_02.png" id="2_blgfj"]
+[ext_resource type="Texture2D" uid="uid://dwpeqvei7c2tc" path="res://assets/island/front_palm_trees/front_palm_tree_top_03.png" id="3_msawe"]
+[ext_resource type="Texture2D" uid="uid://beay0xcyyoar6" path="res://assets/island/front_palm_trees/front_palm_tree_top_04.png" id="4_t07yt"]
+
+[sub_resource type="GDScript" id="GDScript_hfj8t"]
+script/source = "extends StaticBody2D
+
+func _ready() -> void:
+	$AnimatedSprite2D.play(\"default\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_elor2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pb4sj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_blgfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_msawe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t07yt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TopPalmTree" type="StaticBody2D"]
+script = SubResource("GDScript_hfj8t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_elor2")
+frame_progress = 0.180883
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(1, -16)
+scale = Vector2(2.72, 0.4)
+polygon = PackedVector2Array(-8.45588, -3.8147e-06, -9.19118, 12.5, 8.82353, 12.5, 7.35294, -3.8147e-06, 5.14706, -7.5, -4.77941, -7.5)
+one_way_collision = true

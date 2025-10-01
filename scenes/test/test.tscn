@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1diqacg2ybkf"]
+
+[ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="1_da6vm"]
+[ext_resource type="PackedScene" uid="uid://crxeaf7a4hvgo" path="res://scenes/player/player.tscn" id="1_m7npr"]
+[ext_resource type="Texture2D" uid="uid://ck8762h1hy2cf" path="res://assets/island/background/additional_water.png" id="2_st4qh"]
+[ext_resource type="PackedScene" uid="uid://byemie6tfodph" path="res://scenes/levels/island/objects/palm_tree_1.tscn" id="4_51e2l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_st4qh"]
+size = Vector2(31.9061, 31.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51e2l"]
+size = Vector2(31, 20)
+
+[node name="Stage" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="World"]
+position = Vector2(116, 97)
+scale = Vector2(7.24, 0.32)
+texture = ExtResource("1_da6vm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon/StaticBody2D"]
+position = Vector2(-0.0690629, -1.52588e-05)
+shape = SubResource("RectangleShape2D_st4qh")
+
+[node name="Icon2" type="Sprite2D" parent="World"]
+position = Vector2(254, 141)
+texture = ExtResource("2_st4qh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon2/StaticBody2D"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_51e2l")
+
+[node name="Icon3" type="Sprite2D" parent="World"]
+position = Vector2(275, 67)
+rotation = -1.76765
+scale = Vector2(7.24, 0.32)
+texture = ExtResource("1_da6vm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Icon3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Icon3/StaticBody2D"]
+position = Vector2(-0.0690629, -1.52588e-05)
+shape = SubResource("RectangleShape2D_st4qh")
+
+[node name="Player" parent="." instance=ExtResource("1_m7npr")]
+position = Vector2(21, 22)
+
+[node name="PalmTree1" parent="." instance=ExtResource("4_51e2l")]
+position = Vector2(189, 52)
