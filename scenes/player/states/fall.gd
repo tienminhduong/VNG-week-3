@@ -1,5 +1,7 @@
 extends PlayerState
 
+var on_wall_slow_falling_multiplier = 0.1
+
 func _enter() -> void:
 	#Change animation to fall
 	obj.change_animation("fall")
@@ -9,10 +11,12 @@ func _update(_delta: float) -> void:
 	control_moving()
 	print("Update in fall state")
 	
-	control_jump()
 	#Slow falling on wall
 	if obj.is_on_wall():
-		obj.velocity.y = obj.gravity * 0.1
+		obj.velocity.y = obj.gravity * on_wall_slow_falling_multiplier
+		obj.position.x -= obj.direction
+
+	control_jump()
 	  
 	#If on floor change to idle if not moving and not jumping
 	if (obj.is_on_floor()):

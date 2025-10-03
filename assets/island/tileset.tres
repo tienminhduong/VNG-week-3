@@ -1,7 +1,9 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bjhkt1ln7dpi8"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bjhkt1ln7dpi8"]
 
 [ext_resource type="Texture2D" uid="uid://v2dtejovry7r" path="res://assets/island/terrain/terrain_32x32.png" id="1_x61fc"]
 [ext_resource type="PackedScene" uid="uid://byemie6tfodph" path="res://scenes/levels/island/objects/palm_tree_1.tscn" id="2_6gm7o"]
+[ext_resource type="PackedScene" uid="uid://cdsbsaaqwtsm1" path="res://scenes/levels/island/objects/palm_tree_left.tscn" id="3_ysup1"]
+[ext_resource type="PackedScene" uid="uid://cy8py53epky8r" path="res://scenes/levels/island/objects/palm_tree_right.tscn" id="4_fgag5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6gm7o"]
 texture = ExtResource("1_x61fc")
@@ -385,6 +387,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_utk31"]
 scenes/1/scene = ExtResource("2_6gm7o")
+scenes/2/scene = ExtResource("3_ysup1")
+scenes/3/scene = ExtResource("4_fgag5")
 
 [resource]
 tile_size = Vector2i(32, 32)

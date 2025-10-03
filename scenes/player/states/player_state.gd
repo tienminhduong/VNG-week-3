@@ -1,8 +1,6 @@
 class_name PlayerState
 extends FSMState
 
-static var jumpCount = 0;
-
 func _enter() -> void:
 	pass
 
@@ -21,8 +19,12 @@ func control_moving() -> bool:
 		dir = sign(dir)
 		obj.change_direction(dir)
 		obj.velocity.x = obj.movement_speed * dir
-		if obj.is_on_floor():
-			change_state(fsm.states.run)
+		if obj.is_on_floor():		
+			if Input.is_action_pressed("dash"):
+				obj.velocity.x *= obj.dash_speed_multiplier
+				change_state(fsm.states.dash)
+			else:
+				change_state(fsm.states.run)
 		return true
 	else:
 		obj.velocity.x = 0
@@ -31,12 +33,12 @@ func control_moving() -> bool:
 #Control jumping
 #Return true if jumping
 func control_jump() -> bool:
-	if jumpCount >= 2 and not obj.is_on_wall():
+	if obj.jumpCount >= 2 and not obj.is_on_wall():
 		return false
 	
 	#If jump is pressed change to jump state and return true
 	if Input.is_action_just_pressed("jump"):
-		jumpCount += 1
+		obj.jumpCount += 1
 		obj.jump()
 		change_state(fsm.states.jump)
 		return true

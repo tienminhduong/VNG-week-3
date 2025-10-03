@@ -4,10 +4,12 @@ extends CharacterBody2D
 ## Base character class that provides common functionality for all characters
 
 @export var movement_speed: float = 200.0
+@export var dash_speed_multiplier: float = 2.0
 @export var gravity: float = 700.0
 @export var direction: int = 1
 
 var jump_speed: float = 320.0
+var jumpCount: int = 0
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
@@ -35,7 +37,9 @@ func _update_movement(delta: float) -> void:
 	#TODO: Add the gravity
 	velocity.y += gravity * delta
 	move_and_slide()
-	pass
+	
+	if (is_on_wall()):
+		jumpCount = 1
 
 func turn_around() -> void:
 	if _next_direction != direction:
