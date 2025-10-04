@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b2smuakjd4cse"]
+[gd_scene load_steps=23 format=4 uid="uid://b2smuakjd4cse"]
 
 [ext_resource type="TileSet" uid="uid://bjhkt1ln7dpi8" path="res://assets/island/tileset.tres" id="1_ouxwg"]
 [ext_resource type="PackedScene" uid="uid://crxeaf7a4hvgo" path="res://scenes/player/player.tscn" id="2_wrfmn"]
@@ -6,13 +6,88 @@
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_p6ti6"]
 [ext_resource type="Texture2D" uid="uid://ck8762h1hy2cf" path="res://assets/island/background/additional_water.png" id="5_8xrnw"]
 [ext_resource type="Texture2D" uid="uid://m5yds3bm8pou" path="res://assets/island/background/big_clouds.png" id="6_p6ti6"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="7_8xrnw"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="7_yvn80"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="9_uowe5"]
+[ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="10_lilqf"]
+[ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="11_vfrqc"]
+[ext_resource type="Texture2D" uid="uid://drl3x1wfs0vai" path="res://assets/island/background/water_reflect_big_03.png" id="12_m87o4"]
+[ext_resource type="Texture2D" uid="uid://c5ur36rqix0vh" path="res://assets/island/background/water_reflect_big_04.png" id="13_x5lxt"]
+[ext_resource type="Texture2D" uid="uid://clqwctkiuocld" path="res://assets/island/background/water_reflect_medium_01.png" id="14_sojav"]
+[ext_resource type="Texture2D" uid="uid://cc473o8yawaex" path="res://assets/island/background/water_reflect_medium_02.png" id="15_l1oxe"]
+[ext_resource type="Texture2D" uid="uid://853x36mkfxu8" path="res://assets/island/background/water_reflect_medium_03.png" id="16_mhmcu"]
+[ext_resource type="Texture2D" uid="uid://7ph1avmw5ka6" path="res://assets/island/background/water_reflect_medium_04.png" id="17_s8doh"]
 
 [sub_resource type="GDScript" id="GDScript_p6ti6"]
 script/source = "extends ParallaxLayer
 
+var bigCloudsOffset = 20
+
 func _process(delta: float) -> void:
-	motion_offset.x -= delta * 20
+	motion_offset.x -= delta * bigCloudsOffset
 "
+
+[sub_resource type="GDScript" id="GDScript_yvn80"]
+script/source = "extends ParallaxLayer
+
+var smallCloudsOffset = 40
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * smallCloudsOffset
+"
+
+[sub_resource type="GDScript" id="GDScript_lilqf"]
+script/source = "extends ParallaxLayer
+
+var waterReflectOffset = 5
+
+func _ready() -> void:
+	$BigWaterReflect.play()
+	$MediumWaterReflect.play()
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * waterReflectOffset
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sojav"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_lilqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vfrqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_m87o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x5lxt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2wu3v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_sojav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_l1oxe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_mhmcu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_s8doh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Stage" type="Node2D"]
 
@@ -55,3 +130,38 @@ position = Vector2(0, 111)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("6_p6ti6")
 centered = false
+
+[node name="ParallaxLayerSmallCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 85)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_yvn80")
+
+[node name="SmallClouds2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+texture = ExtResource("7_8xrnw")
+centered = false
+
+[node name="SmallClouds3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(232, -86)
+texture = ExtResource("9_uowe5")
+
+[node name="SmallClouds1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloud"]
+position = Vector2(178, -79)
+texture = ExtResource("7_yvn80")
+
+[node name="ParallaxLayerWaterReflect" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(468.805, 0)
+script = SubResource("GDScript_lilqf")
+
+[node name="BigWaterReflect" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayerWaterReflect"]
+position = Vector2(0, 232)
+scale = Vector2(1.9731115, 1.7331108)
+sprite_frames = SubResource("SpriteFrames_sojav")
+frame_progress = 0.40905204
+centered = false
+
+[node name="MediumWaterReflect" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayerWaterReflect"]
+position = Vector2(402.00003, 235.00002)
+scale = Vector2(2.3795695, 2.3795695)
+sprite_frames = SubResource("SpriteFrames_2wu3v")

@@ -114,3 +114,4 @@ script = ExtResource("14_ugbui")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, 0)
+offset = Vector2(0, -60)
