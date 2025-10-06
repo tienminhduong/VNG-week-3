@@ -5,7 +5,6 @@ func _enter() -> void:
 	obj.change_animation("run")
 
 func _update(delta: float):
-	print("Update in run called")
 	#Control jump
 	control_jump()
 	#Control moving and if not moving change to idle

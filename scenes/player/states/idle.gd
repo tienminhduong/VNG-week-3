@@ -8,7 +8,6 @@ func _enter() -> void:
 
 func _update(delta: float) -> void:
 	#Control jump
-	print("Update in idle called")
 	control_jump()
 	#Control moving
 	control_moving()

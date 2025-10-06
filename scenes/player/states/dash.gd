@@ -5,7 +5,6 @@ func _enter() -> void:
 	obj.change_animation("dash")
 	
 func _update(delta: float) -> void:
-	print("Dash update is called")
 	control_jump()
 	control_moving()
 	if (obj.velocity.x == 0):

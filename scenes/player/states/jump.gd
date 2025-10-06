@@ -6,7 +6,6 @@ func _enter() -> void:
 
 func _update(_delta: float):
 	#Control moving
-	print("Update in jump state")
 	control_moving()
 	
 	
